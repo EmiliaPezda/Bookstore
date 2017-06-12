@@ -47,7 +47,6 @@ $(function () {
                 type: 'GET'
             })
             .done(function (response) {
-                console.log('ok');
                 for (var i = 0; i < response.success.length; i++) {
                     renderBook(response.success[i]);
                 }
