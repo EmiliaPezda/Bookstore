@@ -3,7 +3,7 @@ $(function () {
     var $form = $('#authorAdd');
     var $authorList = $('#authorsList');
 
-    $('body').on('click', '.btn-book-remove', function () {
+    $('body').on('click', '.btn-author-remove', function () {
         var id = $(this).data('id');
         var that = $(this);
 
@@ -20,7 +20,7 @@ $(function () {
             });
     });
 
-    $('body').on('click', '.btn-book-show-description', function () {
+    $('body').on('click', '.btn-author-books', function () {
         var id = $(this).data('id');
         var that = $(this);
 
@@ -30,9 +30,9 @@ $(function () {
                 type: 'GET'
             })
             .done(function (response) {
-                var descElement = that.closest('.list-group-item').find('.book-description');
+                var descElement = that.closest('.list-group-item').find('.authorBooksList');
 
-                descElement.text(response.success[0].description);
+                descElement.text(response.success[0].books);
                 descElement.slideDown();
             })
             .fail(function (error) {
@@ -75,12 +75,12 @@ $(function () {
     $form.on('submit', function (event) {
         event.preventDefault();
 
-        var title = $('#title').val(),
-            description = $('#description').val();
+        var name = $('#name').val(),
+            surname = $('#surname').val();
 
-        var newBook = {
-            title: title,
-            description: description
+        var newAuthor = {
+            name: name,
+            surname: surname
         };
 
         $
@@ -88,7 +88,7 @@ $(function () {
                 url: '../rest/rest.php/author',
                 type: 'POST',
                 dataType: 'json',
-                data: newBook
+                data: newAuthor
             })
             .done(function (response) {
                 renderAuthor(response.success[0]);

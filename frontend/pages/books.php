@@ -40,7 +40,8 @@
             <div class="form-group">
                 <label for="title">Author</label>
                 <select name="author_id" id="author_id_edit" class="form-control">
-                    <option value=""> -- Select Author --</option>
+                    <option value="">
+                    </option>
                 </select>
             </div>
             <div class="form-group">
