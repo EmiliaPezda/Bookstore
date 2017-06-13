@@ -2,6 +2,7 @@ $(function () {
 
     var $form = $('#bookAdd');
     var $bookList = $('#booksList');
+    var $bookOption = $('#bookEditSelect');
 
     $('body').on('click', '.btn-book-remove', function () {
         var id = $(this).data('id');
@@ -73,7 +74,10 @@ $(function () {
                 </div>
                 </li>`;
 
+        var option = `<option value=${book.id}> ${book.title}</option>`;
+
         $bookList.html($bookList.html() + string);
+        $bookOption.html($bookOption.html() + option);
     }
 
     $form.on('submit', function (event) {
@@ -99,6 +103,24 @@ $(function () {
             })
             .fail(function (error) {
                 console.log('Create book error', error);
+            });
+    });
+
+    $('body').on('click', '#bookEditSelect', function () {
+        var id = $(this).data('id');
+        var that = $(this);
+        $('#bookEdit').show();
+
+        $
+            .ajax({
+                url: '../rest/rest.php/book/' + id,
+                type: 'GET'
+            })
+            .done(function (response) {
+
+            })
+            .fail(function (error) {
+                console.log('Edit book error', error);
             });
     });
 

@@ -38,7 +38,7 @@
                 <input type="text" class="form-control" name="title" id="title" placeholder="Title...">
             </div>
             <div class="form-group">
-                <label for="title">Author</label>
+                <label for="title" placeholder="Author...">Author</label>
                 <select name="author_id" id="author_id_edit" class="form-control">
                     <option value="">
                     </option>
