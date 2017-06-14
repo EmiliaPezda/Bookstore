@@ -2,6 +2,7 @@ $(function () {
 
     var $form = $('#authorAdd');
     var $authorList = $('#authorsList');
+    var $authorOption = $('#authorEditSelect');
 
     $('body').on('click', '.btn-author-remove', function () {
         var id = $(this).data('id');
@@ -68,8 +69,10 @@ $(function () {
                             <ul class="authorBooksList"></ul>
                         </div>
                     </li>`;
+        var option = `<option value=${author.id}> ${author.name} ${author.surname}</option>`;
 
         $authorList.html($authorList.html() + string);
+        $authorOption.html($authorOption.html() + option);
     }
 
     $form.on('submit', function (event) {
@@ -95,6 +98,24 @@ $(function () {
             })
             .fail(function (error) {
                 console.log('Create author error', error);
+            });
+    });
+
+    $('body').on('click', '#authorEditSelect', function () {
+        var id = $(this).data('id');
+        var that = $(this);
+        $('#authorEdit').show();
+
+        $
+            .ajax({
+                url: '../rest/rest.php/author/' + id,
+                type: 'GET'
+            })
+            .done(function (response) {
+
+            })
+            .fail(function (error) {
+                console.log('Edit author error', error);
             });
     });
 
