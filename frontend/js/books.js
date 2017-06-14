@@ -117,6 +117,35 @@ $(function () {
 
     });
 
+    //editing te book
+    $('bookEdit').on('submit', function (event) {
+        event.preventDefault();
+
+        var title = $('bookEdit #title').val(),
+            author_id = id = $('#bookEditSelect').val(),
+            description = $('bookEdit #description').val();
+
+        var newBook = {
+            title: title,
+            author_id: author_id,
+            description: description
+        };
+
+        $
+            .ajax({
+                url: '../rest/rest.php/book' + id,
+                type: 'PUT',
+                dataType: 'json',
+                data: newBook
+            })
+            .done(function (response) {
+                renderBook(response.success[0]);
+            })
+            .fail(function (error) {
+                console.log('Edit book error', error);
+            });
+    });
+
     function renderAuthor(author) {
         var option = `<option value=${author.id}> ${author.name} ${author.surname}</option>`;
 
@@ -140,7 +169,6 @@ $(function () {
             });
     });
 
-    //$('body #author_id_edit').on('click', getAuthors());
 
     function getAuthors() {
         $

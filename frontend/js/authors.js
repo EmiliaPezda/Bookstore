@@ -105,17 +105,34 @@ $(function () {
         var id = $(this).data('id');
         var that = $(this);
         $('#authorEdit').show();
+    });
+
+
+    $('body #authorEdit').on('submit',  function (event) {
+        event.preventDefault();
+        var id = $('#authorEditSelect').val();
+        var that = $(this);
+
+        var name = $('body #name').eq(1).val(),
+            surname = $('body #surname').eq(1).val();
+
+        var newAuthor = {
+            name: name,
+            surname: surname
+        };
 
         $
             .ajax({
-                url: '../rest/rest.php/author/' + id,
-                type: 'GET'
+                url: '../rest/rest.php/author' + id,
+                type: 'PUT',
+                dataType: 'json',
+                data: newAuthor
             })
             .done(function (response) {
-
+                renderAuthor(response.success[0]);
             })
             .fail(function (error) {
-                console.log('Edit author error', error);
+                console.log('Create author error', error);
             });
     });
 
