@@ -54,7 +54,7 @@ $(function () {
                 }
             })
             .fail(function (error) {
-                console.log('Create book error', error);
+                console.log('Get book error', error);
             });
     }
 
@@ -85,10 +85,12 @@ $(function () {
         event.preventDefault();
 
         var title = $('#title').val(),
+            author_id = id = $('#author_id').val(),
             description = $('#description').val();
 
         var newBook = {
             title: title,
+            author_id: author_id,
             description: description
         };
 
@@ -112,17 +114,7 @@ $(function () {
         var that = $(this);
         $('#bookEdit').show();
 
-        // $
-        //     .ajax({
-        //         url: '../rest/rest.php/book/' + id,
-        //         type: 'GET'
-        //     })
-        //     .done(function (response) {
-        //
-        //     })
-        //     .fail(function (error) {
-        //         console.log('Edit book error', error);
-        //     });
+
     });
 
     function renderAuthor(author) {
@@ -148,6 +140,8 @@ $(function () {
             });
     });
 
+    //$('body #author_id_edit').on('click', getAuthors());
+
     function getAuthors() {
         $
             .ajax({
@@ -164,7 +158,7 @@ $(function () {
             });
     }
 
-    $('body #author_id').on('click', getAuthors());
+    $('#author_id').on('click', getAuthors());
 
 
     getBooks();
