@@ -14,7 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $author->save();
 
     $response = ['success' => [json_decode(json_encode($author), true)]];
-} elseif ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
+} elseif ($_SERVER['REQUEST_METHOD'] == 'PUT') {
     parse_str(file_get_contents("php://input"), $patchVars);
     $authorToEdit = Author::loadAll($conn, $pathId)[0];
     $authorToEdit->setName($patchVars['name']);

@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $book->save();
 
     $response = ['success' => [json_decode(json_encode($book), true)]];
-} elseif ($_SERVER['REQUEST_METHOD'] == 'PATCH') {
+} elseif ($_SERVER['REQUEST_METHOD'] == 'PUT') {
     parse_str(file_get_contents("php://input"), $patchVars);
     $bookToEdit = Book::loadAll($conn, $pathId)[0];
     $bookToEdit->setTitle($patchVars['title']);

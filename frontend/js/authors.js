@@ -21,7 +21,8 @@ $(function () {
             });
     });
 
-    $('body').on('click', '.btn-author-books', function () {
+    $('body').on('click', '.btn-author-books', function (event) {
+        event.preventDefault();
         var id = $(this).data('id');
         var that = $(this);
 
@@ -32,14 +33,18 @@ $(function () {
             })
             .done(function (response) {
                 var descElement = that.closest('.list-group-item').find('.authorBooksList');
+                var array = response.success[0]['books'];
 
-                descElement.text(response.success[0].books);
+                for (var i = 0; i < array.length; i++) {
+                    descElement.append("<li>"+response.success[0]['books'][i]['title']+"</li>")                
+                }
                 descElement.slideDown();
             })
             .fail(function (error) {
                 console.log('Create book error', error);
             });
     });
+
 
     function getAuthors() {
         $
@@ -73,6 +78,7 @@ $(function () {
 
         $authorList.html($authorList.html() + string);
         $authorOption.html($authorOption.html() + option);
+
     }
 
     $form.on('submit', function (event) {
@@ -123,13 +129,13 @@ $(function () {
 
         $
             .ajax({
-                url: '../rest/rest.php/author' + id,
+                url: '../rest/rest.php/author/' + id,
                 type: 'PUT',
                 dataType: 'json',
                 data: newAuthor
             })
             .done(function (response) {
-                renderAuthor(response.success[0]);
+
             })
             .fail(function (error) {
                 console.log('Create author error', error);
