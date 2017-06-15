@@ -1,5 +1,7 @@
 # Bookstore
-PHP/SQL/JS project Bookstore
+PHP/SQL/JS project 
+App enable us to add books and authors to database. All books and authors can be edited. App offers displaying data about books and changing them by using AJAX.
+
 
 # Main page
 
