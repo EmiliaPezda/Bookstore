@@ -36,7 +36,7 @@ $(function () {
                 var array = response.success[0]['books'];
 
                 for (var i = 0; i < array.length; i++) {
-                    descElement.append("<li>"+response.success[0]['books'][i]['title']+"</li>")                
+                    descElement.append("<li>"+response.success[0]['books'][i]['title']+"</li>")
                 }
                 descElement.slideDown();
             })
@@ -81,6 +81,7 @@ $(function () {
 
     }
 
+    //form used for adding new author
     $form.on('submit', function (event) {
         event.preventDefault();
 
@@ -101,6 +102,7 @@ $(function () {
             })
             .done(function (response) {
                 renderAuthor(response.success[0]);
+                
             })
             .fail(function (error) {
                 console.log('Create author error', error);
@@ -113,7 +115,7 @@ $(function () {
         $('#authorEdit').show();
     });
 
-
+    //edit author
     $('body #authorEdit').on('submit',  function (event) {
         event.preventDefault();
         var id = $('#authorEditSelect').val();
@@ -142,6 +144,7 @@ $(function () {
             });
     });
 
+    //show all authors
     getAuthors();
 
 });

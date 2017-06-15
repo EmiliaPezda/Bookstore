@@ -4,6 +4,7 @@ $(function () {
     var $bookList = $('#booksList');
     var $bookOption = $('#bookEditSelect');
     var $bookAuthor = $('#author_id');
+    var $editBookAuthor = $('#author_id_edit');
 
     $('body').on('click', '.btn-book-remove', function () {
         var id = $(this).data('id');
@@ -117,13 +118,16 @@ $(function () {
 
     });
 
-    //editing te book
-    $('bookEdit').on('submit', function (event) {
+    //editing the book
+    $('body #bookEdit').on('submit', function (event) {
         event.preventDefault();
+        console.log('test');
+        var that = $(this);
+        var id = $('#bookEditSelect').val();
 
-        var title = $('bookEdit #title').val(),
-            author_id = id = $('#bookEditSelect').val(),
-            description = $('bookEdit #description').val();
+        var title = $('body #title').eq(1).val(),
+            author_id = $('body #author_id_edit').val(),
+            description = $('body #description').eq(1).val();
 
         var newBook = {
             title: title,
@@ -133,13 +137,13 @@ $(function () {
 
         $
             .ajax({
-                url: '../rest/rest.php/book' + id,
+                url: '../rest/rest.php/book/' + id,
                 type: 'PUT',
                 dataType: 'json',
                 data: newBook
             })
             .done(function (response) {
-                renderBook(response.success[0]);
+
             })
             .fail(function (error) {
                 console.log('Edit book error', error);
@@ -150,6 +154,7 @@ $(function () {
         var option = `<option value=${author.id}> ${author.name} ${author.surname}</option>`;
 
         $bookAuthor.html($bookAuthor.html() + option);
+        $editBookAuthor.html($editBookAuthor.html() + option);
     }
 
     $('body #author_id').on('submit', function () {
@@ -186,7 +191,7 @@ $(function () {
             });
     }
 
-    $('#author_id').on('click', getAuthors());
+    $('body .form-control list-group').on('click', getAuthors());
 
 
     getBooks();
